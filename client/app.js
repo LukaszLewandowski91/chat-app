@@ -16,6 +16,7 @@ loginForm.addEventListener("submit", function login(e) {
 
   if (userNameInput.value.length > 0) {
     userName = userNameInput.value;
+    socket.emit("join", userName);
     loginForm.classList.remove("show");
     messagesSection.classList.add("show");
   } else {
@@ -49,7 +50,9 @@ const addMessage = (author, content) => {
   message.innerHTML = `<h3 class='message__author'>${
     userName === author ? "You" : author
   }</h3>
-  <div class='message__content'>${content}</div>`;
+  <div class='message__content ${
+    author === "Chat Bot" ? "chatBot" : ""
+  }'>${content}</div>`;
 
   messagesList.appendChild(message);
 };
